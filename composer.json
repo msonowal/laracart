@@ -1,0 +1,25 @@
+{
+  "name": "msonowal/laracart",
+  "description": "Laravel Shopping Cart",
+  "keywords": ["laravel", "cart", "shopping", "ecommerce", "laracart", "database"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Manash Jyoti Sonowal",
+      "email": "manash149@gmail.com"
+    }
+  ],
+  "require": {
+    "illuminate/support": "5.1.*|5.2.*|5.3.*",
+    "illuminate/session": "5.1.*|5.2.*|5.3.*",
+    "illuminate/cookie": "5.1.*|5.2.*|5.3.*",
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Msonowal\\Laracart\\": "src/"
+    }
+  },
+  "minimum-stability": "dev-master"
+}
