@@ -180,6 +180,26 @@ class Cart
         $total  =   $this->calculateTotal();
         return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeperator);
     }
+    public function removeDiscount()
+    {
+        $this->instance->removeDiscount();
+    }
+    public function setDiscount($amount, $code=null, $type=CartModel::DISCOUNT_TYPE_PERCENTAGE)
+    {
+        $this->instance->setDiscount($amount, $type, $code);
+    }
+    public function getDiscountApplied($decimals = null, $decimalPoint = null, $thousandSeperator = null)
+    {
+        $discount   =   0.00;
+        $amount     =   $this->instance->discount_amount;
+        if ($this->instance->discount_type==CartModel::DISCOUNT_TYPE_PERCENTAGE) {
+            $discount   =   $this->subTotal() * ($amount/100);
+        }elseif ($this->instance->discount_type==CartModel::DISCOUNT_TYPE_AMOUNT) {
+            $discount   =   $amount;
+        }
+        $discount   =   $this->numberFormat($discount, $decimals, $decimalPoint, $thousandSeperator);
+        return $discount;
+    }
     public function subTotal($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {
         $subTotal   =   $this->calculateTotal();
@@ -188,7 +208,8 @@ class Cart
     public function totalPayable($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {
         //this return float value not a string so that it can be used for making/charging the payment
-        $total  =  $this->subTotal($decimals, $decimalPoint, $thousandSeperator) + $this->shippingCost($decimals, $decimalPoint, $thousandSeperator);
+        $total  =  $this->subTotal($decimals, $decimalPoint, $thousandSeperator) - $this->getDiscountApplied();
+        $total  += $this->shippingCost($decimals, $decimalPoint, $thousandSeperator);
         return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeperator);
     }
     public function setShippingCost($cost)

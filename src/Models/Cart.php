@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $fillable = ['session_key', 'cart_type', 'email', 'customer_id', 'shipping_cost'];
+    protected $fillable = ['cart_type', 'email', 'customer_id', 'shipping_cost','discount_code', 'discount_amount', 'discount_type'];
 
     const CART_TYPE_ABANDONED   =   'abandoned';
     const CART_TYPE_ORDERED     =   'ordered';
     const CART_TYPE_WISHLIST    =   'wishlist';
+    const DISCOUNT_TYPE_NONE  =   0;
+    const DISCOUNT_TYPE_PERCENTAGE  =   1;
+    const DISCOUNT_TYPE_AMOUNT  =   2;
 
     public function items()
     {
@@ -28,6 +31,20 @@ class Cart extends Model
     public function setShippingCost($cost)
     {
         $this->shipping_cost    =   $cost;
+        $this->save();
+    }
+    public function removeDiscount()
+    {
+        $this->discount_amount      =   0;
+        $this->discount_type        =   self::DISCOUNT_TYPE_NONE;
+        $this->discount_code        =   null;
+        $this->save();
+    }
+    public function setDiscount($amount, $type, $code=null)
+    {
+        $this->discount_amount      =   $amount;
+        $this->discount_type        =   $type;
+        $this->discount_code        =   $code;
         $this->save();
     }
 }
