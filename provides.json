@@ -1,0 +1,11 @@
+{
+  "providers": [
+    "Msonowal\\Laracart\\CartServiceProvider"
+  ],
+  "aliases": [
+    {
+      "alias": "Cart",
+      "facade": "Msonowal\\Laracart\\Facades\\Cart"
+    }
+  ]
+}
