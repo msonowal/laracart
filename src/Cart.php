@@ -188,6 +188,10 @@ class Cart
     {
         $this->instance->setDiscount($amount, $type, $code);
     }
+    public function getDiscountCouponApplied()
+    {
+        return $this->instance->discount_code;
+    }
     public function getDiscountApplied($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {
         $discount   =   0.00;
