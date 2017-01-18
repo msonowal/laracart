@@ -290,4 +290,17 @@ class Cart
     {
         return $this->instance->items->get()->toArray();
     }
+    public function copyItems($cartId)
+    {
+        $old_cart   =   CartModel::find($cartId);
+        $old_cart->load('items');
+        foreach ($old_cart->items as $item) {
+            $newItem = $item->replicate(['cart_id']);
+            $this->instance->items()->save($newItem);
+        }
+    }
+    public function touch()
+    {
+        $this->instance->touch();
+    }
 }
