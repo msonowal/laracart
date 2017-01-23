@@ -23,7 +23,7 @@ class Cart
     }
     public function getCookieName()
     {
-        return config('laracart.cookie_name', 'laracart');
+        return config('laracart.cookie_name', '_laracart');
     }
     public function getCookieValue($key=null)
     {
@@ -58,7 +58,7 @@ class Cart
     protected function createCart($cart_type=self::DEFAULT_CART_TYPE)
     {
         $cart   =   CartModel::create(['cart_type'=> $cart_type]);
-        Cookie::queue(Cookie::make($this->getCookieName(), $cart->id, config('larcart.lifetime')));
+        Cookie::queue(Cookie::make($this->getCookieName(), $cart->id, config('laracart.lifetime')));
         return $cart;
     }
     public function destroyCurrentCart($converted=true)
