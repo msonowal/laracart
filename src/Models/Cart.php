@@ -11,7 +11,7 @@ class Cart extends Model
     const CART_TYPE_ABANDONED   =   'abandoned';
     const CART_TYPE_ORDERED     =   'ordered';
     const CART_TYPE_WISHLIST    =   'wishlist';
-    const DISCOUNT_TYPE_NONE  =   0;
+    const DISCOUNT_TYPE_NONE    =   0;
     const DISCOUNT_TYPE_PERCENTAGE  =   1;
     const DISCOUNT_TYPE_AMOUNT  =   2;
 
@@ -46,5 +46,9 @@ class Cart extends Model
         $this->discount_type        =   $type;
         $this->discount_code        =   $code;
         $this->save();
+    }
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
     }
 }
