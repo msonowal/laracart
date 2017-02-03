@@ -13,9 +13,9 @@ class CreateCartTable extends Migration
             $table->string('cart_type')->nullable()->comment('abandoned / recovered / wishlist');
             $table->string('email')->nullable();
             $table->string('customer_id')->nullable();
-            $table->decimal('shipping_cost', 10, 2);
+            $table->decimal('shipping_cost', 10, 2)->default(0);
             $table->tinyInteger('discount_type')->default(\Msonowal\Laracart\Models\Cart::DISCOUNT_TYPE_NONE);
-            $table->decimal('discount_amount', 10, 2);
+            $table->decimal('discount_amount', 10, 2)->default(0);
             $table->string('discount_code')->nullable();
             $table->timestamps();
         });

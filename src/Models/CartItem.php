@@ -19,7 +19,7 @@ class CartItem extends Model
     }
     public function product()
     {
-        return $this->belongsTo(config('laracart.product_model'));
+        return $this->belongsTo(config('laracart.product_model'))->withTrashed();
     }
     public function unitPrice($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {
