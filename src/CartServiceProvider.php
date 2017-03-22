@@ -19,10 +19,9 @@ class CartServiceProvider extends ServiceProvider
     }
     public function register()
     {
-        //$this->app->bind('cart', Cart::class);
-        $this->app->singleton('cart', Cart::class);
         $config = __DIR__ . '/../config/laracart.php';
         $this->mergeConfigFrom($config, 'laracart');
+        $this->app->singleton('cart', Cart::class);
     }
     public function publishConfiguration()
     {

@@ -114,8 +114,8 @@ class Cart
         }else{
             $tax_rate   =   config('laracart.tax_rate', 0.00);
             $cart_item  =   $this->createCartItem($id, $variant, $qty, $price, $tax_rate, $options);
-
         }
+        $this->refresh();
         return $cart_item;
     }
     public function incrementQuantity($id, $qty, $variant, $options)
@@ -145,11 +145,23 @@ class Cart
         }
         $cart_item->quantity = $qty; //TODO implement zero and remove
         $cart_item->save();
+        $this->refresh();
         return $cart_item;
+    }
+    public function refresh()
+    {
+        $this->instance = $this->instance->fresh(['items']);
     }
     public function remove($id)
     {
         $this->instance->items()->where('id', $id)->delete();
+        $this->refresh();
+    }
+    public function removeAll()
+    {
+        $ids    =   $this->items()->pluck('id')->toArray();
+        $this->instance->items()->whereIn('id', $ids)->delete();
+        $this->refresh();
     }
     public function items()
     {
