@@ -154,13 +154,16 @@ class Cart
     }
     public function remove($id)
     {
-        $this->instance->items()->where('id', $id)->delete();
+        $this->instance->items()->where('id', $id)->first()->delete();
         $this->refresh();
     }
     public function removeAll()
     {
         $ids    =   $this->items()->pluck('id')->toArray();
-        $this->instance->items()->whereIn('id', $ids)->delete();
+
+        foreach ($this->instance->items()->whereIn('id', $ids)->get() as $item) {
+            $item->delete();
+        }
         $this->refresh();
     }
     public function items()
