@@ -10,9 +10,9 @@
     }
   ],
   "require": {
-    "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*",
-    "illuminate/session": "5.1.*|5.2.*|5.3.*|5.4.*",
-    "illuminate/cookie": "5.1.*|5.2.*|5.3.*|5.4.*"
+    "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+    "illuminate/session": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+    "illuminate/cookie": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
   },
   "require-dev": {
   },
@@ -24,6 +24,14 @@
   "extra": {
         "branch-alias": {
             "dev-master": "0.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Msonowal\\Laracart\\CartServiceProvider"
+            ],
+            "aliases": {
+                "Cart": "Msonowal\\Laracart\\Facades\\Cart"
+            }
         }
     },
   "minimum-stability": "stable"
