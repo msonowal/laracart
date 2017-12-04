@@ -61,6 +61,9 @@ class CartItem extends Model
         if(is_null($thousandSeperator)){
             $thousandSeperator = is_null(config('laracart.format.thousand_seperator')) ? ',' : config('laracart.format.thousand_seperator');
         }
-        return number_format($value, $decimals, $decimalPoint, $thousandSeperator);
+        if(config('laracart.allow_number_format')){
+            return number_format($value, $decimals, $decimalPoint, $thousandSeperator);
+        }
+        return $value;
     }
 }

@@ -33,4 +33,6 @@ return [
         'thousand_seperator' => ','
     ],
 
+    'allow_number_format'=> env('ALLOW_NUMBER_FORMAT',true),
+
 ];
