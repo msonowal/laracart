@@ -235,6 +235,10 @@ class Cart
     {
         $this->instance->setShippingCost($cost);
     }
+    public function removeShippingCost()
+    {
+        $this->instance->removeShippingCost();
+    }
     public function shippingCost($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {
         $shippingCost   =   $this->instance->shipping_cost;
