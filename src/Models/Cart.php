@@ -33,6 +33,11 @@ class Cart extends Model
         $this->shipping_cost    =   $cost;
         $this->save();
     }
+    public function removeShippingCost()
+    {
+        $this->shipping_cost    =   0;
+        $this->save();
+    }
     public function removeDiscount()
     {
         $this->discount_amount      =   0;
