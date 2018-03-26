@@ -19,6 +19,14 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
+    public function scopeAbandoned($query)
+    {
+        return $query->where('cart_type', self::CART_TYPE_ABANDONED);
+    }
+    public function scopeByCustomer($query,$customer_id)
+    {
+        return $query->where('customer_id',$customer_id);
+    }
     public function isGuest()
     {
         return ($this->customer_id == null || $this->customer_id=='');
