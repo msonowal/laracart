@@ -19,7 +19,7 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
-    public function scopeValid($query)
+    public function scopeAbandoned($query)
     {
         return $query->where('cart_type', self::CART_TYPE_ABANDONED);
     }

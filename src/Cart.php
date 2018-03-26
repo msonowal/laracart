@@ -87,7 +87,7 @@ class Cart
     }
     public function loadCartByUser($id)
     {
-        $cart   =   CartModel::valid()
+        $cart   =   CartModel::abandoned()
                             ->byCustomer($id)->first();
         if (!is_null($cart)) {
             Cookie::queue(Cookie::make($this->getCookieName(), $cart->id, config('laracart.lifetime')));
