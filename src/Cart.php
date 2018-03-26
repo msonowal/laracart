@@ -68,6 +68,10 @@ class Cart
         }
         Cookie::queue(Cookie::forget($this->getCookieName()));
     }
+    public function destroyCurrentUserCart()
+    {
+        Cookie::queue(Cookie::forget($this->getCookieName()));
+    }
     public function setType($cart_type=self::DEFAULT_CART_TYPE)
     {
         $this->instance->changeType($cart_type);
@@ -77,6 +81,16 @@ class Cart
         $cart   =   CartModel::find($id);
         if (!is_null($cart)) {
             $cart->load('items');
+            return $cart;
+        }
+        return $cart;
+    }
+    public function loadCartByUser($id)
+    {
+        $cart   =   CartModel::valid()
+                            ->byCustomer($id)->first();
+        if (!is_null($cart)) {
+            Cookie::queue(Cookie::make($this->getCookieName(), $cart->id, config('laracart.lifetime')));
             return $cart;
         }
         return $cart;
