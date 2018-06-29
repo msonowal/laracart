@@ -243,6 +243,7 @@ class Cart
         //this return float value not a string so that it can be used for making/charging the payment
         $total  =  $this->subTotal($decimals, $decimalPoint, $thousandSeperator) - $this->getDiscountApplied();
         $total  += $this->shippingCost($decimals, $decimalPoint, $thousandSeperator);
+        $total  += $this->handlingCharge($decimals, $decimalPoint, $thousandSeperator);
         return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeperator);
     }
     public function setShippingCost($cost)
@@ -257,6 +258,19 @@ class Cart
     {
         $shippingCost   =   $this->instance->shipping_cost;
         return $this->numberFormat($shippingCost, $decimals, $decimalPoint, $thousandSeperator);
+    }
+    public function setHandlingCharge($charge)
+    {
+        $this->instance->setHandlingCharge($charge);
+    }
+    public function removeHandlingCharge()
+    {
+        $this->instance->removeHandlingCharge();
+    }
+    public function handlingCharge($decimals = null, $decimalPoint = null, $thousandSeperator = null)
+    {
+        $handlingCharge   =   $this->instance->handling_charge;
+        return $this->numberFormat($handlingCharge, $decimals, $decimalPoint, $thousandSeperator);
     }
     public function tax($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {

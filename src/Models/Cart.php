@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $fillable = ['cart_type', 'email', 'customer_id', 'shipping_cost','discount_code', 'discount_amount', 'discount_type'];
+    protected $fillable = ['cart_type', 'email', 'customer_id', 'shipping_cost', 'handling_charge', 'discount_code', 'discount_amount', 'discount_type'];
 
     const CART_TYPE_ABANDONED   =   'abandoned';
     const CART_TYPE_ORDERED     =   'ordered';
@@ -63,5 +63,15 @@ class Cart extends Model
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
+    }
+    public function setHandlingCharge($charge)
+    {
+        $this->handling_charge = $charge;
+        $this->save();
+    }
+    public function removeHandlingCharge()
+    {
+        $this->handling_charge = 0;
+        $this->save();
     }
 }
