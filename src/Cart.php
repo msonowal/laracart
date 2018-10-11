@@ -272,6 +272,14 @@ class Cart
         $handlingCharge   =   $this->instance->handling_charge;
         return $this->numberFormat($handlingCharge, $decimals, $decimalPoint, $thousandSeperator);
     }
+    public function setColumnValue($column, $value=null)
+    {
+        $this->instance->setColumnValue($column, $value);
+    }
+    public function getColumnValue($column)
+    {
+       return $this->instance->{$column};
+    }
     public function tax($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {
         $tax    =   0.00;
