@@ -74,4 +74,9 @@ class Cart extends Model
         $this->handling_charge = 0;
         $this->save();
     }
+    public function setColumnValue($column, $value)
+    {
+        $this->{$column} = $value;
+        $this->save();
+    }
 }
